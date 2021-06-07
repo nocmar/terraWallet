@@ -45,6 +45,15 @@ const ConnectList = () => {
           }
         : []
     )
+    .concat(
+        availableConnectTypes.includes(ConnectType.WALLETCONNECT)
+          ? {
+              label: "READ ONLY",
+              image: <img src={WalletConnect} {...size} alt="WalletConnect" />,
+              onClick: () => connect(ConnectType.READONLY),
+            }
+          : []
+      )
 
   return (
     <article className={styles.component}>
