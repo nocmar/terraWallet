@@ -1,0 +1,141 @@
+@mixin flex($justify-content: center, $align-items: center) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+  }
+  
+  @mixin link($initial: fade-out(white, 0.5), $hover: white) {
+    @include transition(color);
+    color: $initial;
+  
+    &:hover,
+    &.active {
+      color: $hover;
+    }
+  }
+
+  @mixin transition($property: all) {
+    transition: $property $transition-duration;
+  }
+  /* Colors */
+$bg: #121a2f !default;
+$darkblue: #172240 !default;
+$airdrop: #1a314c !default;
+
+$gray: #cccccc !default;
+$brown: #a0a0a0 !default;
+$light: #f0f0f0 !default;
+$battleship: #6d738c !default;
+$slate: #505466 !default;
+
+$blue: #1eb2ff !default;
+$aqua: #47d7e2 !default;
+$red: #e64c57 !default;
+$orange: #dd794a !default;
+
+$text: $gray;
+$button: white !default;
+$header: $darkblue !default;
+$saturated-blue: saturate(darken($darkblue, 2%), 6%);
+
+$colors: (
+  bg: $bg,
+  darkblue: $darkblue,
+  battleship: $battleship,
+  slate: $slate,
+  blue: $blue,
+  aqua: $aqua,
+  red: $red,
+  orange: $orange,
+);
+
+$hr-shadow: fade-out(black, 0.8);
+$hr: fade-out(white, 0.92);
+$border: 1px solid fade-out($slate, 0.8);
+$border-radius: 10px;
+
+/* Fonts */
+$font-size: 14px;
+$font-family: "Poppins";
+
+/* Sizes */
+$max-width: 1200px !default;
+$breakpoint: 992px;
+$gutter: 30px;
+$line-height: 1.5;
+$nav-height: 70px;
+$footer-height: 50px;
+$footer-height-mobile: 100px;
+
+$card-padding-horizontal: 25px;
+$card-padding-header: 20px $card-padding-horizontal;
+$card-padding-main: $card-padding-header;
+
+/* Transitions */
+$transition-duration: 0.2s;
+
+/* Z-indexes */
+$zindex-sticky: 1020;
+
+
+.header {
+  border-bottom: 1px solid $hr;
+  box-shadow: inset 0 -1px $hr-shadow;
+  padding: $card-padding-header;
+}
+
+.title {
+  color: white;
+  font-size: 16px;
+  text-transform: capitalize;
+
+  .center & {
+    text-align: center;
+  }
+}
+
+.description:not(:empty) {
+  margin-top: 5px;
+}
+
+/* theme */
+.default {
+  @include flex(space-between);
+
+  .wrapper {
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .center {
+    margin-right: 0;
+  }
+}
+
+.goback {
+  @include flex(flex-start);
+  padding: unset;
+
+  .action {
+    @include flex;
+    @include link(inherit);
+    flex: none;
+    padding: $card-padding-header;
+  }
+
+  .title {
+    flex: 1;
+    text-align: center;
+    padding-right: (24px + (2 * $card-padding-horizontal));
+  }
+}
+
+.icon {
+  text-align: center;
+
+  .wrapper {
+    @include flex;
+    min-height: 50px;
+    margin-bottom: 5px;
+  }
+}

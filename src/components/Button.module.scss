@@ -1,0 +1,161 @@
+// @import "mixins";
+// @import "variables";
+@mixin flex($justify-content: center, $align-items: center) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+  }
+  @mixin button {
+    text-transform: uppercase;
+  }
+  
+  @mixin transition($property: all) {
+    transition: $property $transition-duration;
+  }
+  /* Transitions */
+$transition-duration: 0.2s;
+/* Colors */
+$bg: #121a2f !default;
+$darkblue: #172240 !default;
+$airdrop: #1a314c !default;
+
+$gray: #cccccc !default;
+$brown: #a0a0a0 !default;
+$light: #f0f0f0 !default;
+$battleship: #6d738c !default;
+$slate: #505466 !default;
+
+$blue: #1eb2ff !default;
+$aqua: #47d7e2 !default;
+$red: #e64c57 !default;
+$orange: #dd794a !default;
+
+$text: $gray;
+$button: white !default;
+$header: $darkblue !default;
+$saturated-blue: saturate(darken($darkblue, 2%), 6%);
+
+$colors: (
+  bg: $bg,
+  darkblue: $darkblue,
+  battleship: $battleship,
+  slate: $slate,
+  blue: $blue,
+  aqua: $aqua,
+  red: $red,
+  orange: $orange,
+);
+
+
+.button {
+  @include flex;
+  @include button;
+  @include transition;
+
+  display: inline-flex;
+  font-weight: 500;
+  user-select: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  & + & {
+    margin-left: 10px;
+  }
+
+  // sequence important
+  &.disabled {
+    opacity: 0.3;
+  }
+
+  &.loading {
+    opacity: 0.5;
+  }
+}
+
+@mixin hover {
+  &:hover:not(.loading):not(.disabled) {
+    @content;
+  }
+}
+
+.button:not(.outline) {
+  background-color: $blue;
+  color: $button;
+
+  @include hover {
+    background-color: fade-out($blue, 0.25);
+  }
+
+  &.disabled {
+    background-color: $slate;
+  }
+}
+
+/* outline */
+.outline {
+  border-width: 1px;
+  border-style: solid;
+
+  @include hover {
+    opacity: 0.75;
+  }
+
+  @mixin button-outline-variant($color) {
+    border-color: $color;
+    color: $color;
+  }
+
+  @each $name, $color in $colors {
+    &.#{$name} {
+      @include button-outline-variant($color);
+    }
+  }
+
+  &.secondary {
+    @include button-outline-variant(fade-out(white, 0.4));
+  }
+}
+
+/* block */
+.block {
+  width: 100%;
+}
+
+/* sizes */
+@mixin button-size($font-size, $height, $padding) {
+  border-radius: ($height / 2);
+  font-size: $font-size;
+  height: $height;
+  padding: 0 $padding;
+}
+
+.xs {
+  @include button-size(10px, 22px, 10px);
+}
+
+.sm {
+  @include button-size(12px, 26px, 10px);
+  min-width: 74px;
+}
+
+.md {
+  @include button-size(14px, 36px, 20px);
+  min-width: 160px;
+}
+
+.lg {
+  @include button-size(16px, 50px, 30px);
+  width: 100%;
+}
+
+/* theme */
+.submit {
+  margin-top: 30px;
+}
+
+/* label */
+.progress {
+  margin-right: 10px;
+}

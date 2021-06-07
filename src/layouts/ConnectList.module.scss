@@ -1,0 +1,67 @@
+@mixin flex($justify-content: center, $align-items: center) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+  }
+  
+  $modal-width: 620px;
+  /* Colors */
+$bg: #121a2f !default;
+$darkblue: #172240 !default;
+$airdrop: #1a314c !default;
+
+$gray: #cccccc !default;
+$brown: #a0a0a0 !default;
+$light: #f0f0f0 !default;
+$battleship: #6d738c !default;
+$slate: #505466 !default;
+
+$blue: #1eb2ff !default;
+$aqua: #47d7e2 !default;
+$red: #e64c57 !default;
+$orange: #dd794a !default;
+
+$text: $gray;
+$button: white !default;
+$header: $darkblue !default;
+$saturated-blue: saturate(darken($darkblue, 2%), 6%);
+
+$colors: (
+  bg: $bg,
+  darkblue: $darkblue,
+  battleship: $battleship,
+  slate: $slate,
+  blue: $blue,
+  aqua: $aqua,
+  red: $red,
+  orange: $orange,
+);
+
+.component {
+  padding: 10px;
+  max-width: $modal-width;
+  margin: 0 auto;
+}
+
+.title {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.button {
+  @include flex(space-between);
+  background-color: $bg;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 20px;
+  width: 100%;
+
+  & + & {
+    margin-top: 20px;
+  }
+}
